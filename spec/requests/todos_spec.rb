@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'Todos API', type: :request do
   # initialize test data
   let!(:todos) { create_list(:todo, 10) }
@@ -39,7 +41,7 @@ RSpec.describe 'Todos API', type: :request do
       end
 
       it 'returns not found message' do
-        expect(response.body).to match /Could't find todo/
+        expect(response.body).to match /Couldn't find Todo with/
       end
     end
   end
