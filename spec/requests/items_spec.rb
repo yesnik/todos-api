@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Items API' do
   let!(:todo) { create :todo }
-  let(:todo_id) { create todo.id }
-  let!(:items) { create_list(:item, 20, todo_id: todo_id) }
+  let!(:items) { create_list(:item, 20, todo_id: todo.id) }
+  let(:todo_id) { todo.id }
   let(:id) { items.first.id }
 
   describe 'GET /todos/:todo_id/items' do
@@ -20,7 +20,7 @@ RSpec.describe 'Items API' do
     end
 
     context 'when todo does not exist' do
-      let(:todo) { 0 }
+      let(:todo_id) { 0 }
 
       it 'returns status code 404' do
         expect(response).to have_http_status 404
