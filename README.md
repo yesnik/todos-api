@@ -1,24 +1,64 @@
-# README
+# Rails API for todo list
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installation
 
-Things you may want to cover:
+* Clone this repository
 
-* Ruby version
+```
+git clone ...
+```
 
-* System dependencies
+* Install dependencies
 
-* Configuration
+```
+cd todos-api
+bundle install
+```
 
-* Database creation
+* Setup application
 
-* Database initialization
+```
+rails db:setup
+```
 
-* How to run the test suite
+## Usage
 
-* Services (job queues, cache servers, search engines, etc.)
+### Preparation
 
-* Deployment instructions
+To call our api we can use different tools:
 
-* ...
+- browser
+- curl
+- httpie
+
+For manual api testing we recommend to use `httpie` library:
+
+```
+sudo apt install httpie
+```
+
+### Examples of calling api
+
+* Firstly we need to get auth token for our default user:
+
+```
+http :3000/auth/login email=kenny@mail.ru password=123
+```
+
+* Get many todo items:
+
+```
+http :3000/todos page==2 Accept:'application/vnd.todos.v1+json' Authorization:'eyJhbG... cTp8Hocsdc'
+```
+
+* Get info for todo with ID = 2:
+
+```
+http :3000/todos/2 Accept:'application/vnd.todos.v1+json' Authorization:'eyJhbG... cTp8Hocsdc'
+```
+
+* Create item for todo:
+
+```
+http POST :3000/todos/1/items name='Listen to music' Accept:'application/vnd.todos.v2+json' Authorization:'eyJhbG... cTp8Hocsdc'
+```
